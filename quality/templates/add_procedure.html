@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+{% load crispy_forms_tags %}
+
+
+  {% block content %}
+
+  <div class="container">
+  <form method="POST", enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-3">
+        {{ form|crispy }}
+        <input type="file", name="doc">
+      </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary" name="button">dodaj</button>
+  </form>
+  </div>
+
+  {% endblock %}
+
+</div>

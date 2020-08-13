@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+
+  {% block content %}
+
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Procedure Id</th>
+          <th>Product Familly</th>
+          <th>Product Super Familly</th>
+          <th>Date</th>
+          <th>Technican</th>
+          <th>Desc</th>
+          <th>Documentation</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+      {% for item in items %}
+        <tr>
+          <td>{{ item.idtestprocedure }}</td>
+          <td>{{ item.idproductfamilly.familly }}</td>
+          <td>{{ item.idproductfamilly.superfamilly }}</td>
+          <td>{{ item.date.thedate }}</td>
+          <td>{{ item.idtechnican.name }}</td>
+          <td>{{ item.description }}</td>
+          <td><a class="btn btn-primary btn-sm" href="{% url 'download_procedure' %}?idtestprocedure={{ item.idtestprocedure }}" role="button" method="post">Document</a></td>
+        </tbody>
+      {% endfor %}
+
+    </table>
+      <br>
+      <a class="btn btn-primary" name="button" href="{% url 'add_procedure' %}" method="post">Add new procedure</a>
+  </div>
+  {% endblock %}

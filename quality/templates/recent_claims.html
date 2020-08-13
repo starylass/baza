@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+
+
+<div class="container">
+<form action="{% url 'send' %}" method="get">
+  <br><br>
+  <button type="submit" class="btn btn-primary" name="button">Add to data base*</button>
+  <br>
+  <font size="1">*Claims that has been check. Documentation has been prepared.</font>
+  <br><br>
+  {% csrf_token %}
+  {% render_table table %}
+</form>
+</div>
+
+{% endblock %}

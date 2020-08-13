@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+
+  {% block content %}
+
+  <div class="container">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Part Number</th>
+          <th>Date</th>
+          <th>Technican</th>
+          <th>Manufacture Defect</th>
+          <th>Desc</th>
+          <th>Documentation</th>
+          <th>Corrective document</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+      {% for item in items %}
+        {% ifchanged %}
+        <tr>
+          <td><a class="btn btn-primary btn-sm" href="{% url 'case_details' %}?idfactclaimcase={{ item.idfactclaimcase.idfactclaimcase }}" role="button" method="post">{{ item.partnumber.partnumber }}</a></td>
+          <td>{{ item.idfactclaimcase.thedate.thedate }}</td>
+          <td>{{ item.idfactclaimcase.idtechnican.name }}</td>
+          <td>{{ item.idfactclaimcase.manufacturedef }}</td>
+          <td>{{ item.idfactclaimcase.description }}</td>
+          {% if item.idfactclaimcase.doc == None %}
+            <td>No document</td>
+          {% else %}
+            <td><a class="btn btn-primary btn-sm" href="{% url 'download' %}?idfactclaimcase={{ item.idfactclaimcase.idfactclaimcase }}" role="button" method="post">Document</a></td>
+          {% endif %}
+          {% if item.idfactclaimcase.correctiveactiondoc == None %}
+            <td><a class="btn btn-primary btn-sm" href="{% url 'add_corrective' %}?idfactclaimcase={{ item.idfactclaimcase.idfactclaimcase }}" role="button" method="post">Add doc</a></td>
+          {% else %}
+            <td><a class="btn btn-primary btn-sm" href="{% url 'download_corrective' %}?idfactclaimcase={{ item.idfactclaimcase.idfactclaimcase }}" role="button" method="post">Document</a></td>
+          {% endif %}
+        </tbody>
+        {% endifchanged %}
+      {% endfor %}
+
+    </table>
+
+  </div>
+
+  {% endblock %}
